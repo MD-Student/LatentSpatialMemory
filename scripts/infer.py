@@ -15,15 +15,15 @@ if str(SRC_ROOT) not in sys.path:
 import torch
 from diffsynth.core import ModelConfig
 
-from mirage.inference.mirage_pipeline import (
-    MirageConfig,
-    MiragePipeline,
+from lsm.inference.lsm_pipeline import (
+    LSMConfig,
+    LSMPipeline,
     load_lora_checkpoint,
     load_vace_checkpoint,
     validate_pipe,
 )
-from mirage.spatia.vace_init import build_scratch_vace_from_dit
-from mirage.spatia.wan_video_new import WanVideoPipeline
+from lsm.spatia.vace_init import build_scratch_vace_from_dit
+from lsm.spatia.wan_video_new import WanVideoPipeline
 
 
 def parse_args() -> argparse.Namespace:
@@ -165,8 +165,8 @@ def validate_args(args: argparse.Namespace) -> None:
         raise ValueError("--preceding-pixel-frames must be non-negative.")
 
 
-def build_inference_config(args: argparse.Namespace) -> MirageConfig:
-    return MirageConfig(
+def build_inference_config(args: argparse.Namespace) -> LSMConfig:
+    return LSMConfig(
         num_frames=args.num_frames,
         start_frame=args.start_frame,
         infer_steps=args.infer_steps,
@@ -193,7 +193,7 @@ def load_pipeline_from_args(
     args: argparse.Namespace,
     *,
     device: torch.device | None = None,
-) -> MiragePipeline:
+) -> LSMPipeline:
     runtime_dtype = parse_torch_dtype(args.torch_dtype)
     if device is None:
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -230,7 +230,7 @@ def load_pipeline_from_args(
     if args.lora_checkpoint is not None:
         load_lora_checkpoint(pipe, args.lora_checkpoint, alpha=args.lora_alpha)
 
-    return MiragePipeline(pipe, build_inference_config(args))
+    return LSMPipeline(pipe, build_inference_config(args))
 
 
 def main() -> None:

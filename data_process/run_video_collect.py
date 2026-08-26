@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Mirage clip sampling entrypoint.
+LSM clip sampling entrypoint.
 
 This script only prepares clip folders under output_root:
 1. Collect source videos

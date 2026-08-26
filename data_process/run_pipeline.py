@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Mirage downstream data processing pipeline.
+LSM downstream data processing pipeline.
 
 Pipeline stages:
 1. Consume pre-sampled clips under output_root
@@ -636,7 +636,7 @@ def run_pipeline_iteration(
     log_stage_header("Geometry + Sample Building", rank)
 
     sample_config = SampleConfig()
-    from mirage.wan2_2 import WanVAEWrapper
+    from lsm.wan2_2 import WanVAEWrapper
 
     vae_dtype = _get_point_cloud_vae_dtype(sample_config.point_cloud_vae_dtype)
     point_cloud_vae = WanVAEWrapper(

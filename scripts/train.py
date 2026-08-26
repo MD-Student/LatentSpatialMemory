@@ -30,12 +30,12 @@ from torch import nn
 from torch.utils.data import DataLoader
 from tqdm.auto import tqdm
 
-from mirage.dataset import DataConfig, MirageDataset, mirage_collate_fn  # noqa: E402
-from mirage.spatia.wan_video_new import (  # noqa: E402
+from lsm.dataset import DataConfig, LSMDataset, lsm_collate_fn  # noqa: E402
+from lsm.spatia.wan_video_new import (  # noqa: E402
     WanVideoPipeline,
     model_fn_wan_video,
 )
-from mirage.spatia.vace_init import build_scratch_vace_from_dit  # noqa: E402
+from lsm.spatia.vace_init import build_scratch_vace_from_dit  # noqa: E402
 
 logger = get_logger(__name__)
 
@@ -72,7 +72,7 @@ def validate_diffsynth_2x_api() -> None:
         )
 
 
-class MirageTrainingModel(nn.Module):
+class LSMTrainingModel(nn.Module):
     def __init__(
         self,
         dit: nn.Module,
@@ -579,7 +579,7 @@ def build_dataloader(args: argparse.Namespace) -> DataLoader:
         max_reference_frames=args.max_reference_frames,
         max_preceding_frames=args.max_preceding_frames,
     )
-    dataset = MirageDataset(data_config, model_version=args.model_version)
+    dataset = LSMDataset(data_config, model_version=args.model_version)
     return DataLoader(
         dataset,
         batch_size=args.batch_size,
@@ -587,7 +587,7 @@ def build_dataloader(args: argparse.Namespace) -> DataLoader:
         num_workers=args.num_workers,
         pin_memory=True,
         persistent_workers=args.num_workers > 0,
-        collate_fn=mirage_collate_fn,
+        collate_fn=lsm_collate_fn,
     )
 
 
@@ -1110,7 +1110,7 @@ def main() -> None:
     if "lora" in stages:
         dit = apply_lora_to_dit(dit, args)
 
-    model = MirageTrainingModel(
+    model = LSMTrainingModel(
         dit=dit,
         vace=pipe.vace,
         gradient_checkpointing=args.gradient_checkpointing,

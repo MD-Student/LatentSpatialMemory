@@ -10,7 +10,7 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SCRIPT_ROOT = Path(__file__).resolve().parent
 SRC_ROOT = REPO_ROOT / "src"
-WORLD_SCORE_ROOT = REPO_ROOT.parent / "world-score-mirage"
+WORLD_SCORE_ROOT = REPO_ROOT.parent / "world-score-lsm"
 if str(SCRIPT_ROOT) not in sys.path:
     sys.path.insert(0, str(SCRIPT_ROOT))
 if str(SRC_ROOT) not in sys.path:
@@ -34,17 +34,17 @@ from worldscore.benchmark.helpers import GetHelpers
 from worldscore.benchmark.utils.utils import check_model, empty_cache
 from worldscore.common.utils import print_banner
 
-from mirage.inference.mirage_pipeline import (  # noqa: E402
+from lsm.inference.lsm_pipeline import (  # noqa: E402
     VideoGeometry,
     infer_mapanything_depths,
 )
 
-MODEL_NAME = "mirage"
+MODEL_NAME = "LSM-World"
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Run WorldScore with Mirage and latent memory."
+        description="Run WorldScore with LSM-World and latent memory."
     )
     parser.add_argument(
         "--worldscore_json_file",
@@ -100,7 +100,9 @@ def build_parser() -> argparse.ArgumentParser:
 
 def load_worldscore_config() -> Any:
     base_config = OmegaConf.load(WORLD_SCORE_ROOT / "config/base_config.yaml")
-    model_config = OmegaConf.load(WORLD_SCORE_ROOT / "config/model_configs/mirage.yaml")
+    model_config = OmegaConf.load(
+        WORLD_SCORE_ROOT / "config/model_configs" / f"{MODEL_NAME}.yaml"
+    )
     return OmegaConf.merge(base_config, model_config)
 
 
@@ -310,7 +312,7 @@ def generate(
 
 
 def main(argv: list[str] | None = None) -> None:
-    print_banner("MIRAGE LATENT-MEM WORLDSCORE GENERATION")
+    print_banner("LSM-WORLD LATENT-MEM WORLDSCORE GENERATION")
     parser = build_parser()
     args = parser.parse_args(argv)
 

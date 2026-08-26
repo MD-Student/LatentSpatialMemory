@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Pack Mirage training data folders into sharded LMDB.
+Pack LSM training data folders into sharded LMDB.
 
 Packs .pt (latents) and .txt (captions) files from each sample folder
 into a sharded LMDB for efficient training data loading.
@@ -30,7 +30,7 @@ from tqdm import tqdm
 GB = 1024**3
 
 
-# Files required by MirageDataset at training time.
+# Files required by LSMDataset at training time.
 REQUIRED_FILES_TO_PACK = [
     ("train_target_rgb", ".pt"),
     ("train_target_rgb", ".txt"),
@@ -205,7 +205,7 @@ def build_sharded_lmdb(
     write_batch: int = 256,
 ):
     """
-    Build sharded LMDB from Mirage training data folders.
+    Build sharded LMDB from LSM training data folders.
 
     Args:
         data_root: Root directory containing sample folders (00000000, 00000001, ...)
@@ -349,7 +349,7 @@ def build_sharded_lmdb(
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Pack Mirage data to sharded LMDB")
+    parser = argparse.ArgumentParser(description="Pack LSM data to sharded LMDB")
     parser.add_argument(
         "--data-root",
         type=str,
@@ -387,7 +387,7 @@ def main():
     extract_first_frames = ["train_target_rgb"]
 
     print("=" * 60)
-    print("Mirage LMDB Packer")
+    print("LSM LMDB Packer")
     print("=" * 60)
     print("Configuration:")
     print(f"  Data root: {data_root}")

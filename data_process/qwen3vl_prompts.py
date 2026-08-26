@@ -1,5 +1,5 @@
 """
-Qwen3-VL foreground entity extraction for the Mirage pipeline.
+Qwen3-VL foreground entity extraction for the LSM pipeline.
 
 This module uses the DashScope API through LiteLLM instead of local
 Transformers/vLLM inference.

@@ -284,7 +284,7 @@ class ModelManager:
         if model_id_list:
             raise ValueError(
                 "DiffSynth 2.x compatibility only supports explicit local model "
-                "files in mirage.spatia.ModelManager."
+                "files in lsm.spatia.ModelManager."
             )
         self.torch_dtype = torch_dtype
         self.device = device

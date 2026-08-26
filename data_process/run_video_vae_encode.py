@@ -10,7 +10,7 @@ from tqdm.auto import tqdm
 
 from data_process.data_config import CONFIG
 from data_process.distributed import get_rank_info, shard_items
-from mirage.wan2_2 import WanVAEWrapper
+from lsm.wan2_2 import WanVAEWrapper
 
 
 def _infer_vae_checkpoint(model_path: str) -> str:
@@ -22,7 +22,7 @@ def _infer_vae_checkpoint(model_path: str) -> str:
 def get_vae_wrapper(model_path: str, vae_checkpoint: str) -> WanVAEWrapper:
     resolved_checkpoint = vae_checkpoint.strip() or _infer_vae_checkpoint(model_path)
     print(
-        f"[VAE] Using mirage WanVAEWrapper: path={model_path}, checkpoint={resolved_checkpoint}",
+        f"[VAE] Using LSM WanVAEWrapper: path={model_path}, checkpoint={resolved_checkpoint}",
         flush=True,
     )
     return WanVAEWrapper(

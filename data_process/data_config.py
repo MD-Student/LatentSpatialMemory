@@ -63,7 +63,7 @@ class DataConfig:
 
     def print_config(self) -> None:
         print("=" * 60)
-        print("Mirage Pipeline Configuration")
+        print("LSM Pipeline Configuration")
         print("=" * 60)
         print(f"Video dirs      : {self.video_dirs}")
         print(f"Output root     : {self.output_root}")

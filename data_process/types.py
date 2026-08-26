@@ -1,5 +1,5 @@
 """
-Mirage data type definitions.
+LSM data type definitions.
 """
 
 from __future__ import annotations

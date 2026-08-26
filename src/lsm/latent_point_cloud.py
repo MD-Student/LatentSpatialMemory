@@ -1,5 +1,5 @@
 """
-Core data structure for Mirage.
+Core data structure for LSM.
 """
 
 from __future__ import annotations

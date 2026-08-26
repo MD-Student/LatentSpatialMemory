@@ -23,7 +23,7 @@ from data_process.reference_frames import (
 )
 from data_process.sample_indices import sample_frame_indices
 from data_process.types import SampleIndices, VideoGeometry
-from mirage.latent_point_cloud import LatentPointCloud
+from lsm.latent_point_cloud import LatentPointCloud
 
 
 def resize_frames(frames: np.ndarray, target_size: tuple[int, int]) -> np.ndarray:

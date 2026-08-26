@@ -5,7 +5,7 @@ import torch
 from jaxtyping import Float
 from torch import Tensor
 
-from mirage.wan2_2.modules import Wan2_1_VAE, Wan2_2_VAE
+from lsm.wan2_2.modules import Wan2_1_VAE, Wan2_2_VAE
 
 
 class WanVAEWrapper:

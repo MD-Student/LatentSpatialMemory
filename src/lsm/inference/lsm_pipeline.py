@@ -13,11 +13,11 @@ from safetensors.torch import load_file as load_safetensors
 from torch import Tensor
 from tqdm.auto import tqdm
 
-from mirage.inference.utils import compute_iteration_plan
-from mirage.latent_point_cloud import LatentPointCloud
-from mirage.spatia.flow_match import FlowUniPCMultistepScheduler
-from mirage.spatia.utils import load_state_dict
-from mirage.spatia.wan_video_new import WanVideoPipeline, model_fn_wan_video
+from lsm.inference.utils import compute_iteration_plan
+from lsm.latent_point_cloud import LatentPointCloud
+from lsm.spatia.flow_match import FlowUniPCMultistepScheduler
+from lsm.spatia.utils import load_state_dict
+from lsm.spatia.wan_video_new import WanVideoPipeline, model_fn_wan_video
 
 
 @dataclass
@@ -33,7 +33,7 @@ class VideoGeometry:
 
 
 @dataclass
-class MirageConfig:
+class LSMConfig:
     num_frames: int = 33
     start_frame: int = 0
     infer_steps: int = 20
@@ -140,11 +140,11 @@ def validate_pipe(pipe: WanVideoPipeline) -> None:
         raise ValueError()
 
 
-class MiragePipeline:
+class LSMPipeline:
     def __init__(
         self,
         pipe: WanVideoPipeline,
-        config: MirageConfig,
+        config: LSMConfig,
     ) -> None:
         self.pipe = pipe
         self.config = config
@@ -676,7 +676,7 @@ def validate_geometry(geometry: VideoGeometry, *, start_frame: int) -> None:
 
 def resolve_output_hw(
     geometry: VideoGeometry,
-    config: MirageConfig,
+    config: LSMConfig,
 ) -> tuple[int, int]:
     if config.height is not None or config.width is not None:
         if config.height is None or config.width is None:
@@ -975,7 +975,7 @@ def infer_mapanything_depths(
     pose_indices: list[int],
     model_id: str,
     device: torch.device,
-    model_cache: MiragePipeline,
+    model_cache: LSMPipeline,
 ) -> list[dict[str, np.ndarray]]:
     from mapanything.models import MapAnything
     from mapanything.utils.image import preprocess_inputs

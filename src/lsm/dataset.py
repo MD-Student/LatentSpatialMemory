@@ -23,9 +23,9 @@ class DataConfig:
     max_preceding_frames: int | None = None
 
 
-class MirageDataset(Dataset):
+class LSMDataset(Dataset):
     """
-    Dataset for Mirage training with scene point cloud conditioning.
+    Dataset for LSM training with scene point cloud conditioning.
 
     Expected LMDB structure per sample:
     - train_target_rgb.pt: dict with 'latent' key, shape [T, C, H, W]
@@ -494,9 +494,9 @@ def _pad_variable_length_tensors(
     return torch.stack(padded), torch.stack(masks)
 
 
-def mirage_collate_fn(batch):
+def lsm_collate_fn(batch):
     """
-    Custom collate function for Mirage dataset.
+    Custom collate function for LSM dataset.
     Handles variable-length reference and preceding sequences.
     """
     collated = {}

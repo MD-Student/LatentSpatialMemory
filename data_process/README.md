@@ -1,6 +1,6 @@
 # Data Processing
 
-This directory contains the data preparation pipeline for Mirage training data. Most runtime options are defined in `data_config.py`.
+This directory contains the data preparation pipeline for LSM training data. Most runtime options are defined in `data_config.py`.
 
 ## Workflow
 

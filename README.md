@@ -57,7 +57,7 @@
 <table>
   <tr>
     <td align="center"><b>Latent Memory</b><br />Persistent 3D scene context lives directly in latent space.</td>
-    <td align="center"><b>No RGB Detour</b><br />Mirage avoids repeated render-and-reencode cache updates.</td>
+    <td align="center"><b>No RGB Detour</b><br /> avoids repeated render-and-reencode cache updates.</td>
   </tr>
   <tr>
     <td align="center"><b>Memory Lifecycle</b><br />Initialize, read, denoise, and update across generated chunks.</td>
@@ -68,17 +68,17 @@
 ## Method
 
 <p align="center">
-  <img src="assets/architecture.png" width="900" alt="Mirage architecture" />
+  <img src="assets/architecture.png" width="900" alt=" architecture" />
 </p>
 
 <p align="center">
-  Mirage builds a persistent latent cache from the initial observation. For each generated chunk, it reads target-view memory, uses it during denoising, and writes updated static scene content back to the cache.
+   builds a persistent latent cache from the initial observation. For each generated chunk, it reads target-view memory, uses it during denoising, and writes updated static scene content back to the cache.
 </p>
 
 ## Results
 
 <p align="center">
-  <img src="assets/efficiency.png" width="900" alt="Mirage efficiency results" />
+  <img src="assets/efficiency.png" width="900" alt=" efficiency results" />
 </p>
 
 <table align="center">
@@ -141,7 +141,7 @@ This repository is built upon open-source projects including [Spatia](https://gi
 If you find this project useful, please cite:
 
 ```bibtex
-@article{wang2026mirage,
+@article{wang2026,
   title   = {Latent Spatial Memory for Video World Models},
   author  = {Wang, Weijie and Zhao, Haoyu and Yang, Yifan and Chen, Feng and Zhang, Zeyu and He, Yefei and Duan, Zicheng and Chen, Donny Y. and Yang, Yuqing and Zhuang, Bohan},
   journal = {arXiv preprint arXiv:2606.09828},
